@@ -1,0 +1,44 @@
+script/console
+Loading development environment (Rails 2.3.2)
+>> m=Mongotest.new
+=> #<Mongotest _id: nil, mongotest_id: nil, case: nil>
+>> m.mongotest_id=1
+=> 1
+>> m.case="first"
+=> "first"
+>> m.save
+=> true
+>> m
+=> #<Mongotest _id: #<XGen::Mongo::Driver::ObjectID:0x1969f50 @data=[25, 160, 100, 74, 82, 189, 220, 75, 176, 0, 0, 0]>, mongotest_id: 1, case: "first">
+>> n=Mongotest.find(:first, :conditions => "mongotest_id = 1")
+=> #<Mongotest _id: #<XGen::Mongo::Driver::ObjectID:0x195d9e4 @data=[25, 160, 100, 74, 82, 189, 220, 75, 176, 0, 0, 0]>, mongotest_id: 1, case: "first">
+>> n
+=> #<Mongotest _id: #<XGen::Mongo::Driver::ObjectID:0x195d9e4 @data=[25, 160, 100, 74, 82, 189, 220, 75, 176, 0, 0, 0]>, mongotest_id: 1, case: "first">
+>> n.case="second"
+=> "second"
+>> n.save
+=> true
+
+mongod log when this happens.
+
+./mongodb-osx-x86_64-2009-07-18/bin/mongod --dbpath data/db-mongotest run &
+[1] 46318
+justin-shaffers-macbook-pro:mongo shafferj$ Mon Jul 20 12:49:01 Mongo DB : starting : pid = 46318 port = 27017 dbpath = data/db-mongotest master = 0 slave = 0  64-bit 
+Mon Jul 20 12:49:01 db version v0.9.6+, pdfile version 4.4
+Mon Jul 20 12:49:01 git version: f6aebb421f94ea2f05af3c804a4726ef226231cc
+Mon Jul 20 12:49:01 sys info: Darwin ERH-OFC-MP.local 9.6.0 Darwin Kernel Version 9.6.0: Mon Nov 24 17:37:00 PST 2008; root:xnu-1228.9.59~1/RELEASE_I386 i386
+Mon Jul 20 12:49:01 waiting for connections on port 27017
+Mon Jul 20 12:49:01 web admin interface listening on port 28017
+
+justin-shaffers-macbook-pro:mongo shafferj$ 
+justin-shaffers-macbook-pro:mongo shafferj$ Mon Jul 20 12:49:06 connection accepted from 127.0.0.1:11715
+Mon Jul 20 12:49:29 allocating new datafile data/db-mongotest/mongotest_development.ns, filling with zeroes...
+Mon Jul 20 12:49:29 done allocating datafile data/db-mongotest/mongotest_development.ns, size: 16777216, took 0.022 secs
+Mon Jul 20 12:49:29 allocating new datafile data/db-mongotest/mongotest_development.0, filling with zeroes...
+Mon Jul 20 12:49:29 done allocating datafile data/db-mongotest/mongotest_development.0, size: 67108864, took 0.087 secs
+Mon Jul 20 12:49:30 building new index on { _id: ObjId(000000000000000000000000) } for mongotest_development.mongotests...done for 0 records
+Mon Jul 20 12:49:29 insert mongotest_development.mongotests 1961ms
+Mon Jul 20 12:50:25 User Exception E11000 duplicate key errorindex: mongotest_development.mongotests.$_id_  dup key: { : ObjId(19a0644a52bddc4bb0000000) }
+Mon Jul 20 12:50:25 mongotest_development.mongotests  Caught Assertion insert, continuing
+
+

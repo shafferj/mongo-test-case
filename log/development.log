@@ -1,0 +1,27 @@
+
+
+Processing TestController#mongotest (for 127.0.0.1 at 2009-07-20 12:34:24) [GET]
+Rendering test/mongotest
+Completed in 6ms (View: 5, DB: 0) | 200 OK [http://127.0.0.1/test/mongotest]
+
+
+Processing TestController#mongotest (for 127.0.0.1 at 2009-07-20 12:35:04) [GET]
+
+LoadError (Expected /Users/shafferj/Development/mongo-test-case/app/models/test.rb to define Test):
+  app/controllers/test_controller.rb:3:in `mongotest'
+
+Rendered rescues/_trace (37.0ms)
+Rendered rescues/_request_and_response (1.3ms)
+Rendering rescues/layout (internal_server_error)
+
+
+Processing TestController#mongotest (for 127.0.0.1 at 2009-07-20 12:35:16) [GET]
+
+NoMethodError (You have a nil object when you didn't expect it!
+The error occurred while evaluating nil.columns):
+  app/controllers/test_controller.rb:3:in `new'
+  app/controllers/test_controller.rb:3:in `mongotest'
+
+Rendered rescues/_trace (30.3ms)
+Rendered rescues/_request_and_response (0.2ms)
+Rendering rescues/layout (internal_server_error)

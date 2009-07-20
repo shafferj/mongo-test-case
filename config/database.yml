@@ -1,0 +1,4 @@
+development:
+  adapter: mongo
+  database: mongotest_development
+    
